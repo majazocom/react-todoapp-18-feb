@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Plant from "./Components/Plant";
+import PlantForm from "./Components/PlantForm";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [plants, setPlants] = useState([
+    {
+      name: 'Sunflower',
+      family: 'Plant family',
+      shade: false,
+      sun: true,
+      img: 'random image'
+    }
+  ]);
+
+  function updatePlantsArray(newPlant) {
+    console.log(...plants);
+    console.log(plants);
+    setPlants(plants => [...plants, newPlant]);
+  }
+
+    return ( 
+      <section className ="App">
+        <PlantForm updatePlants={updatePlantsArray}/>
+        {plants.map((plant, index) => (
+          <Plant data={plant} key={index} />
+        ))}
+      </section>
+    );
 }
 
 export default App;
